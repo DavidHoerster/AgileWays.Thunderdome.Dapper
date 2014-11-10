@@ -1,0 +1,99 @@
+﻿<div class="pull-right">
+    <select ng-model="selectedPlayer" ng-change="getPlayer()" ng-options="pl.Id as pl.Name for pl in playerLookup"></select>
+</div>
+<div>
+    <h3>{{player.Player.Name.First + ' ' + player.Player.Name.Last}}</h3>
+    <p>Bats: {{player.Player.Bats}} Throws: {{player.Player.Throws}}</p>
+    <p>Height: {{player.Player.Height}}in.  Weight: {{player.Player.Weight}}lbs</p>
+
+
+    <div ng-if="player.Batting.length > 0">
+        <h3>Batting</h3>
+        <table class="table table-striped">
+            <thead>
+                <th>Year</th>
+                <th>Team</th>
+                <th>Games</th>
+                <th>At Bats</th>
+                <th>Hits</th>
+                <th>Runs</th>
+                <th>Doubles</th>
+                <th>Triples</th>
+                <th>Home Runs</th>
+                <th>RBI</th>
+                <th>AVG</th>
+                <th>OBP</th>
+                <th>SLG</th>
+            </thead>
+            <tbody>
+                <tr ng-repeat="batting in player.Batting">
+                    <td>{{batting.Year}}</td>
+                    <td>{{batting.TeamId}}</td>
+                    <td>{{batting.Games}}</td>
+                    <td>{{batting.AtBats}}</td>
+                    <td>{{batting.Hits}}</td>
+                    <td>{{batting.Runs}}</td>
+                    <td>{{batting.Doubles}}</td>
+                    <td>{{batting.Triples}}</td>
+                    <td>{{batting.HomeRuns}}</td>
+                    <td>{{batting.RunsBattedIn}}</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div ng-if="player.Pitching.length > 0">
+        <h3>Pitching</h3>
+        <table class="table table-striped">
+            <thead>
+                <th>Year</th>
+                <th>Team</th>
+                <th>Games</th>
+                <th>Wins</th>
+                <th>Losses</th>
+                <th>Saves</th>
+                <th>Games Started</th>
+                <th>Complete Games</th>
+                <th>Shutouts</th>
+                <th>ERA</th>
+                <th>Strikeouts</th>
+            </thead>
+            <tbody>
+                <tr ng-repeat="pitching in player.Pitching">
+                    <td>{{pitching.Year}}</td>
+                    <td>{{pitching.TeamId}}</td>
+                    <td>{{pitching.Games}}</td>
+                    <td>{{pitching.Wins}}</td>
+                    <td>{{pitching.Losses}}</td>
+                    <td>{{pitching.Saves}}</td>
+                    <td>{{pitching.GamesStarted}}</td>
+                    <td>{{pitching.CompleteGames}}</td>
+                    <td>{{pitching.Shutouts}}</td>
+                    <td>{{pitching.Era}}</td>
+                    <td>{{pitching.Strikeouts}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div ng-if="player.Salary.length > 0">
+        <h3>Salary History</h3>
+        <table class="table table-striped">
+            <thead>
+                <th>Year</th>
+                <th>Team</th>
+                <th>Amount</th>
+            </thead>
+            <tbody>
+                <tr ng-repeat="salary in player.Salary">
+                    <td>{{salary.Year}}</td>
+                    <td>{{salary.TeamId}}</td>
+                    <td>{{salary.Amount}}</td>
+                </tr>
+            </tbody>
+        </table>
+</div>
+</div>

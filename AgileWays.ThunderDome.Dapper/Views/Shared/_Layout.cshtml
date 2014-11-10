@@ -1,0 +1,110 @@
+﻿<!DOCTYPE html>
+<html ng-app="dapperBall" id="ng-app" xmlns:ng="http://angularjs.org">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - MongoBaseball</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <style>
+        .searchBox {
+            font-size: 48px !important;
+            letter-spacing: 5px;
+            text-align: center;
+            border: none;
+            border-bottom: 2px solid #dddee1 !important;
+            padding: 10px;
+            text-transform: uppercase;
+            font-family: "ultramagnetic", Calibri, Helvetica, Arial, sans-serif !important;
+            outline: none !important;
+            height: auto;
+        }
+        .searchNote {
+            font-family: Calibri, Helvetica, Arial, sans-serif;
+            font-style: normal;
+            opacity: .5;
+            text-transform: uppercase;
+            font-size: 12px;
+            text-align: center;
+        }
+
+    </style>
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("MongoBaseball.NET", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse" ng-controller="navController">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Actions</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/">Main</a></li>
+                            <li><a href="/#/thunder">Search by Player ID</a></li>
+                            <li><a href="/#/create">Insert a New Player</a></li>
+                            <li><a href="/#/getSeveral">Get Several Players by ID</a></li>
+                        </ul>
+
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <form ng-submit="search()" class="navbar-form search" role="search">
+                            <button type="button" class="btn dropdown-toggle"><i class="fa fa-search"></i></button>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <div style="display:block;padding:0 20px 10px 20px;">
+                                        <input class="searchBox" type="text" ng-model="searchText" placeholder="Search text" />
+                                        <p class="searchNote">Hit Enter To Search</p>
+                                        <h3>Results ({{searchResults.length || 0}} items):</h3>
+                                        <div style="overflow:auto;height:400px;">
+                                            <br />
+                                            <div ng-repeat="result in searchResults">
+                                                <h4><a href="/#/card/{{result.PlayerId}}">{{result.PlayerName}}</a></h4>
+                                                <p ng-bind-html="result.Snippet"></p>
+                                                <hr />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    @RenderBody()
+    <hr />
+
+    <div class="container body-content" ng-view>
+    </div>
+
+    <footer>
+        <p>&copy; @DateTime.Now.Year - MongoBaseball.NET</p>
+    </footer>
+    <script src="~/Scripts/vendor/angular.js"></script>
+    <script src="~/Scripts/vendor/angular-animate.js"></script>
+    <script src="~/Scripts/vendor/angular-resource.js"></script>
+    <script src="~/Scripts/vendor/angular-route.js"></script>
+    <script src="~/Scripts/vendor/angular-sanitize.js"></script>
+    <script src="~/Scripts/vendor/ui-bootstrap-tpls-0.10.0.min.js"></script>
+    <script src="~/Scripts/jquery-1.9.0.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+
+    <script src="~/assets/dapperBall.js"></script>
+    <script src="~/assets/controllers/cardController.js"></script>
+    <script src="~/assets/controllers/searchController.js"></script>
+    <script src="~/assets/controllers/navController.js"></script>
+    <script src="~/assets/controllers/playerController.js"></script>
+</body>
+</html>
